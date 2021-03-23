@@ -1,5 +1,7 @@
 def call(Map params) {
 	String subModules = ''
+	echo params.submodules
+	echo params.submodules.size()
 	for (int i = 0; i < params.submodules.size(); i++) { 
 		if (i > 0) {
 			subModules += ", "
