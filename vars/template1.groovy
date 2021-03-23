@@ -8,14 +8,7 @@ def call(body) {
 		try{
 			stage('Git Clone'){
 				echo 'Clone Start'
-				checkout([
-					$class: 'GitSCM', 
-					branches: [[name: "*/${config.branch}"]], 
-					doGenerateSubmoduleConfigurations: false, 
-					extensions: [], 
-					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: 'ssh', url: "git@gitlab01.mitake.com.tw:apptech/${config.repositoryUrl}.git"]]
-				])
+				echo "*/${config.branch}"
 				echo 'Clone End'
 			}
 			stage('Nuget Restore'){
