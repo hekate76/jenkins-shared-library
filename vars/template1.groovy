@@ -4,10 +4,7 @@ def call(Map params) {
 	echo "${params.submodules.size()}"
 	for (int i = 0; i < params.submodules.size(); i++) { 
 		echo "${params.submodules[i]}"
-		if (i > 0) {
-			subModules += ", "
-		}
-		subModules += "[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: false, reference: 'https://gitlab01.mitake.com.tw/apptech/" + "${params.submodules[i]}" + ".git', trackingSubmodules: false]"
+		
 	}
 	node {
 		try{
