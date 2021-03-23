@@ -9,10 +9,11 @@ def call(body) {
 			stage('Git Clone'){
 				echo 'Clone Start'
 				checkout([
-					$class: 'GitSCM', 
-					branches: [[name: '*/develop']], 
-					doGenerateSubmoduleConfigurations: false, 
-					userRemoteConfigs: [[credentialsId: 'ssh', url: 'git@gitlab01.mitake.com.tw:apptech/bot-mbpay-gateway.git']]
+					scm: [
+						$class: 'GitSCM', 
+						branches: [[name: '*/develop']], 
+						userRemoteConfigs: [[credentialsId: 'ssh', url: 'git@gitlab01.mitake.com.tw:apptech/bot-mbpay-gateway.git']]
+					]
 				])
 				echo 'Clone End'
 			}
