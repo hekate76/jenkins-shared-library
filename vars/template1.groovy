@@ -1,11 +1,11 @@
 def call(Map params) {
-	String subModules = ''
-	echo "${params.submodules}"
-	echo "${params.submodules.size()}"
-	for (int i = 0; i < params.submodules.size(); i++) { 
-		echo "${params.submodules[i]}"
-		
+	def subModules = []
+	if ("${params.submodules}" != null) {
+		for (int i = 0; i < params.submodules.size(); i++) {
+			subModules.add("[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: false, reference: 'https://gitlab01.mitake.com.tw/apptech/" + "${params.submodules[i]}" + ".git', trackingSubmodules: false]")
+		}
 	}
+	
 	node {
 		try{
 			stage('Git Clone'){
@@ -13,7 +13,7 @@ def call(Map params) {
 				checkout([
 					$class: 'GitSCM', 
 					branches: [[name: "${params.branch}"]], 
-					extensions: [subModules],
+					extensions: subModules,
 					userRemoteConfigs: [[credentialsId: 'ssh', url: "${params.repositoryUrl}"]]
 				])
 				echo 'Clone End'
