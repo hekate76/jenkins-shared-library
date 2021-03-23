@@ -1,4 +1,11 @@
 def call(Map params) {
+	def subModules = []
+	if ("${params.submodules}" != null) {
+		for (int i = 0; i < params.submodules.size(); i++) {
+			subModules.add([$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: false, trackingSubmodules: false, reference: 'https://gitlab01.mitake.com.tw/apptech/nomura-library-gateway.git'])
+		}
+	}
+	
 	node {
 		try{
 			stage('Git Clone'){
@@ -6,6 +13,7 @@ def call(Map params) {
 				checkout([
 					$class: 'GitSCM', 
 					branches: [[name: "${params.branch}"]], 
+					extensions: subModules,
 					userRemoteConfigs: [[credentialsId: 'ssh', url: "${params.repositoryUrl}"]]
 				])
 				echo 'Clone End'
