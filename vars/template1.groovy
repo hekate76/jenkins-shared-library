@@ -12,12 +12,12 @@ def call(Map params) {
 			}
 			stage('Nuget Restore'){
 				echo 'Restore Start'
-				bat '%Nuget% restore "${params.solutionName}".sln'
+				bat '%Nuget% restore %params.solution%'
 				echo 'Restore End'
 			}
 			stage('Build And Publish'){
 				echo 'Build And Publish Start'
-				bat '"%MSBuild14.0%" "${params.solutionName}" "/p:DeployOnBuild=true;Configuration=Release;PublishProfile=%PublishFolder%\\%JOB_NAME%.pubxml"'
+				bat '"%MSBuild14.0%" %params.solution% "/p:DeployOnBuild=true;Configuration=Release;PublishProfile=%PublishFolder%\\%JOB_NAME%.pubxml"'
 				echo 'Build And Publish End'
 			}
 		}
