@@ -8,17 +8,17 @@ def call(body) {
 		try{
 			stage('Git Clone'){
 				echo 'Clone Start'
-				checkout(config.branch, config.repositoryUrl)
+				checkout([$class: 'GitSCM', branches: [[name: '*/${config.branch}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'ssh', url: 'git@gitlab01.mitake.com.tw:apptech/${config.repositoryUrl}.git']]])
 				echo 'Clone End'
 			}
 			stage('Nuget Restore'){
 				echo 'Restore Start'
-				restore(config.solutionName)
+				bat '%Nuget% restore ${config.solutionName}.sln'
 				echo 'Restore End'
 			}
 			stage('Build And Publish'){
 				echo 'Build And Publish Start'
-				deploy(config.solutionName)
+				bat '"%MSBuild14.0%" ${config.solutionName} "/p:DeployOnBuild=true;Configuration=Release;PublishProfile=%PublishFolder%\\%JOB_NAME%.pubxml"'
 				echo 'Build And Publish End'
 			}
 		}
