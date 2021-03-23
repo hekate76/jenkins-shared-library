@@ -2,8 +2,7 @@ def call(Map params) {
 	def subModules = []
 	if ("${params.submodules}" != null) {
 		for (int i = 0; i < params.submodules.size(); i++) {
-			subModules.add([$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: false, trackingSubmodules: false, reference: 'https://gitlab01.mitake.com.tw/apptech/nomura-library-gateway.git'])
-			echo subModules[0]
+			subModules.add("[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: false, trackingSubmodules: false, reference: 'https://gitlab01.mitake.com.tw/apptech/nomura-library-gateway.git']")
 		}
 	}
 	
