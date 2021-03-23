@@ -8,17 +8,17 @@ def call(body) {
 		try{
 			stage('Git Clone'){
 				echo 'Clone Start'
-				checkout(${config.branch}, ${config.repositoryUrl})
+				checkout(config.branch, config.repositoryUrl)
 				echo 'Clone End'
 			}
 			stage('Nuget Restore'){
 				echo 'Restore Start'
-				restore(${config.solutionName})
+				restore(config.solutionName)
 				echo 'Restore End'
 			}
 			stage('Build And Publish'){
 				echo 'Build And Publish Start'
-				deploy(${config.solutionName})
+				deploy(config.solutionName)
 				echo 'Build And Publish End'
 			}
 		}
