@@ -5,8 +5,8 @@ def call(Map params) {
 				echo 'Clone Start'
 				checkout([
 					$class: 'GitSCM', 
-					branches: [[name: '*/"${params.branch}"']], 
-					userRemoteConfigs: [[credentialsId: 'ssh', url: 'git@gitlab01.mitake.com.tw:apptech/"${params.repositoryUrl}".git']]
+					branches: [[name: "${params.branch}"]], 
+					userRemoteConfigs: [[credentialsId: 'ssh', url: "${params.repositoryUrl}"]]
 				])
 				echo 'Clone End'
 			}
