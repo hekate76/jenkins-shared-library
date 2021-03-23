@@ -2,7 +2,7 @@ def call(Map params) {
 	def subModules = []
 	if ("${params.submodules}" != null) {
 		for (int i = 0; i < params.submodules.size(); i++) {
-			subModules.add("[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: false, reference: 'https://gitlab01.mitake.com.tw/apptech/" + "${params.submodules[i]}" + ".git', trackingSubmodules: false]")
+			subModules.add([$class: 'SubmoduleOption'])
 		}
 	}
 	
