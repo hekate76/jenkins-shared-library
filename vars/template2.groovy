@@ -5,7 +5,7 @@ def call(Map params) {
 			subModules.add([$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: false, trackingSubmodules: false, reference: 'https://gitlab01.mitake.com.tw/apptech/nomura-library-gateway.git'])
 		}
 	}
-	
+	echo subModules
 	node {
 		try{
 			stage('Git Clone'){
