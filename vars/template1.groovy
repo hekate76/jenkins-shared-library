@@ -1,12 +1,12 @@
 def call(Map params) {
 	String subModules = ''
-	echo params.submodules
-	echo params.submodules.size()
+	echo "${params.submodules}"
+	echo "${params.submodules.size()}"
 	for (int i = 0; i < params.submodules.size(); i++) { 
 		if (i > 0) {
 			subModules += ", "
 		}
-		subModules += "[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: false, reference: 'https://gitlab01.mitake.com.tw/apptech/${params.submodules}[i].git', trackingSubmodules: false]"
+		subModules += "[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: false, reference: 'https://gitlab01.mitake.com.tw/apptech/" + "${params.submodules}[i]" + ".git', trackingSubmodules: false]"
 	}
 	node {
 		try{
